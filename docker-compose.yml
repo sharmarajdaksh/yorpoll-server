@@ -1,0 +1,22 @@
+version: '3'
+services:
+    go:
+        build:
+            context: ./server/
+            dockerfile: Dockerfile
+        restart: always
+        environment:
+            POSTGRES_HOST: postgres
+            POSTGRES_PASSWORD: Password123
+            POSTGRES_USERNAME: postgres
+            POSTGRES_DATABASE: postgres
+        volumes:
+            - ./server:/usr/app
+        ports: 
+            - 8081:8081
+    postgres:
+        image: postgres
+        restart: always
+        environment:
+            # Use Docker secrets for production
+            POSTGRES_PASSWORD: Password123
